@@ -3,14 +3,14 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-#define b 17  // Alt kümelerinin istenen toplamı
-#define n 10  // A kümesinin eleman sayısı
-#define column b+2 //Hesap matrisinde kullanılacak sütun sayısı b+2 tercih edildi fakat %100 garanti için küme elemanları toplamı kadar olabilir(en kötü durum).
+#define b 17  // Alt kÃ¼melerinin istenen toplamÄ±
+#define n 10  // A kÃ¼mesinin eleman sayÄ±sÄ±
+#define column b+2 //Hesap matrisinde kullanÄ±lacak sÃ¼tun sayÄ±sÄ± b+2 tercih edildi fakat %100 garanti iÃ§in kÃ¼me elemanlarÄ± toplamÄ± kadar olabilir(en kÃ¶tÃ¼ durum).
 main(){
 int dizi[n]={0,6,2,7,1};
 int hesap[n][column];
 int fark=b,tempi,tempj,tempj2;
-   //Rasgele atanan değerler
+   //Rasgele atanan deÄŸerler
    srand(time(NULL));
    for(int i=0;i<n;i++)
    	 dizi[i]=1+rand()%b;
@@ -18,14 +18,13 @@ int fark=b,tempi,tempj,tempj2;
    for(int i=0;i<n;i++)
    	  printf(" %4d",dizi[i]);
    printf("\n");
-
 	/*
-		* Hesap matrisinin oluşturulması
-		* Hesap matrisi o anda ki b değerinin (örn:12) dizi elemanlarından hangileriyle optimum oluştuğunu gösterir
-		* Her satır dizi elemanını ve öncekileri temsil eder.
-		* örn:A={6,2,7,1} için 2.elemanı ele alırsak eğer sutundaki b değerine göre optimum değer seçilir.
-		* bu değer b=2 iken 2, b=6 iken 6 , b=8 iken 2 ve 6 olur.
-		* 2.eleman söz konusu olduğundan sadece bu satırda bu 2 elemana bakılmaktadır.
+		* Hesap matrisinin oluÅŸturulmasÄ±
+		* Hesap matrisi o anda ki b deÄŸerinin (Ã¶rn:12) dizi elemanlarÄ±ndan hangileriyle optimum oluÅŸtuÄŸunu gÃ¶sterir
+		* Her satÄ±r dizi elemanÄ±nÄ± ve Ã¶ncekileri temsil eder.
+		* Ã¶rn:A={6,2,7,1} iÃ§in 2.elemanÄ± ele alÄ±rsak eÄŸer sutundaki b deÄŸerine gÃ¶re optimum deÄŸer seÃ§ilir.
+		* bu deÄŸer b=2 iken 2, b=6 iken 6 , b=8 iken 2 ve 6 olur.
+		* 2.eleman sÃ¶z konusu olduÄŸundan sadece bu satÄ±rda bu 2 elemana bakÄ±lmaktadÄ±r.
 	*/
 	for(int i=0;i<n;i++)		
 		for(int j=0;j<column;j++){
@@ -37,19 +36,19 @@ int fark=b,tempi,tempj,tempj2;
 		    else if(dizi[i]+hesap[i-1][j-dizi[i]] > hesap[i-1][j]) 			
 				hesap[i][j]=dizi[i]+hesap[i-1][j-dizi[i]]; 
 		}
-	//Hesap matrisi içindeki değerleri gözle test etmek için ekrana basıldı.		
+	//Hesap matrisi iÃ§indeki deÄŸerleri gÃ¶zle test etmek iÃ§in ekrana basÄ±ldÄ±.		
 	for(int i=0;i<n;i++){
 		printf("\n");
 		for(int j=0;j<column;j++)
 		    printf(" %4d",hesap[i][j]);		
 	}
-    /*
-		* Bulduğumuz değer veya bulmak istediğimiz değere en yakın değer tespit edildi
-		* Bulmak istenilen değerin (b.sütunun) kendisine ve sağ kısmına bakıldı.
-		* örn: b=12 için 12.sütuna bakıldı eğer 12 varsa zaten doğrudan cevap 12 olarak ele alınması gerekir.
-		* 12 o sütunda yoksa elemanların 12'den farkları alınır (mutlak değer içinde) ve (12+1).sütun için işlem tekrar edilir.
-		* farkların minumumu tespit edilir ve o noktanın konumu (tempi=i ve tempj=j) hafızada tutulur.
-		* hesap[tempi][tempj] konumu bizim cevabımız olur.
+         /*
+		* BulduÄŸumuz deÄŸer veya bulmak istediÄŸimiz deÄŸere en yakÄ±n deÄŸer tespit edildi
+		* Bulmak istenilen deÄŸerin (b.sÃ¼tunun) kendisine ve saÄŸ kÄ±smÄ±na bakÄ±ldÄ±.
+		* Ã¶rn: b=12 iÃ§in 12.sÃ¼tuna bakÄ±ldÄ± eÄŸer 12 varsa zaten doÄŸrudan cevap 12 olarak ele alÄ±nmasÄ± gerekir.
+		* 12 o sÃ¼tunda yoksa elemanlarÄ±n 12'den farklarÄ± alÄ±nÄ±r (mutlak deÄŸer iÃ§inde) ve (12+1).sÃ¼tun iÃ§in iÅŸlem tekrar edilir.
+		* farklarÄ±n minumumu tespit edilir ve o noktanÄ±n konumu (tempi=i ve tempj=j) hafÄ±zada tutulur.
+		* hesap[tempi][tempj] konumu bizim cevabÄ±mÄ±z olur.
 	*/
 	for(int i=0;i<n;i++)
 		for(int j=column-2;j<=column;j++){
@@ -58,17 +57,17 @@ int fark=b,tempi,tempj,tempj2;
 			    fark=abs(hesap[i][j]-b);
 			}		    
 		}
-	tempj2=tempj;//tempj'nin aşağıda değeriyle oynanacağı için tekrar hafızada tutuldu.
+	tempj2=tempj;//tempj'nin aÅŸaÄŸÄ±da deÄŸeriyle oynanacaÄŸÄ± iÃ§in tekrar hafÄ±zada tutuldu.
 	printf("\n\n");
 	/*
-		* Hangi elemanların toplanması sonucu son değerin elde edildiğinin tespiti.
-		* Hesap matrisi oluştururken A kümesinin elemanı > b olduğu durumda o sütuna kadar tüm değerler üst satırın aynısı olur.
-		* Nedeni örn: {6} için; b=1,2,3,4,5 karşılamaz değeri 0 olur.Öncesinde bir eleman olsaydı üstteki değerler doğrudan alta aktarılırdı.
-		* Fakat b=6 için karşılanır ve 1.satır b=6.sütun değeri 6 olur.
-		* Sonraki satırlar hesaplanırken (A kümesinin elemanı < b), bir önceki satırın A kümesinin elemanı kadar geri gidip orda bulunan eleman A kümesinin elemanıyla toplanır..
-		* bu toplam eğer bulunduğumuz konumun bir önceki satır değerinden büyükse yeni satır değerimiz olur.Küçük veya eşitse bir önceki satır değeri yeni satır değeri olur.
-		* Aslında bizim seçtiğimiz A kümesinin elemanı, konumun değiştiği (toplanan) yani önceki satır değeri olmayan değerlerdir.
-		* Bu kod blogunda bu değişimin olduğu yerler tespit edilip ekrana basılmıştır. 
+		* Hangi elemanlarÄ±n toplanmasÄ± sonucu son deÄŸerin elde edildiÄŸinin tespiti.
+		* Hesap matrisi oluÅŸtururken A kÃ¼mesinin elemanÄ± > b olduÄŸu durumda o sÃ¼tuna kadar tÃ¼m deÄŸerler Ã¼st satÄ±rÄ±n aynÄ±sÄ± olur.
+		* Nedeni Ã¶rn: {6} iÃ§in; b=1,2,3,4,5 karÅŸÄ±lamaz deÄŸeri 0 olur.Ã–ncesinde bir eleman olsaydÄ± Ã¼stteki deÄŸerler doÄŸrudan alta aktarÄ±lÄ±rdÄ±.
+		* Fakat b=6 iÃ§in karÅŸÄ±lanÄ±r ve 1.satÄ±r b=6.sÃ¼tun deÄŸeri 6 olur.
+		* Sonraki satÄ±rlar hesaplanÄ±rken (A kÃ¼mesinin elemanÄ± < b), bir Ã¶nceki satÄ±rÄ±n A kÃ¼mesinin elemanÄ± kadar geri gidip orda bulunan eleman A kÃ¼mesinin elemanÄ±yla toplanÄ±r..
+		* bu toplam eÄŸer bulunduÄŸumuz konumun bir Ã¶nceki satÄ±r deÄŸerinden bÃ¼yÃ¼kse yeni satÄ±r deÄŸerimiz olur.KÃ¼Ã§Ã¼k veya eÅŸitse bir Ã¶nceki satÄ±r deÄŸeri yeni satÄ±r deÄŸeri olur.
+		* AslÄ±nda bizim seÃ§tiÄŸimiz A kÃ¼mesinin elemanÄ±, konumun deÄŸiÅŸtiÄŸi (toplanan) yani Ã¶nceki satÄ±r deÄŸeri olmayan deÄŸerlerdir.
+		* Bu kod blogunda bu deÄŸiÅŸimin olduÄŸu yerler tespit edilip ekrana basÄ±lmÄ±ÅŸtÄ±r. 
 	*/
 	for(int i=tempi;i>=0;i--)			
 		for(int j=tempj;j>0;j--){
